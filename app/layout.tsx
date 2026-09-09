@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Party Tab",
-  description: "Track what we order. No login. No names.",
+  description: "Track what we order.",
 };
 
 export const viewport: Viewport = {
@@ -21,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-dvh bg-cream text-ink antialiased">
-        <div className="mx-auto w-full max-w-lg px-4 pb-16 pt-6">{children}</div>
+        <div className="mx-auto w-full max-w-lg px-4 pb-16 pt-6">
+          {children}
+        </div>
       </body>
     </html>
   );

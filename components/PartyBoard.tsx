@@ -67,7 +67,7 @@ export function PartyBoard() {
       <header className="text-center">
         <h1 className="text-3xl font-black tracking-tight">🍻 PARTY TAB</h1>
         <p className="mt-1 text-sm font-medium text-ink-soft">
-          Track what we order. No login. No names.
+          Track what we order.
         </p>
       </header>
 
