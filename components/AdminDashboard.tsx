@@ -3,17 +3,25 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { formatINR } from "@/lib/format";
+import { AdminMenuList } from "@/components/AdminMenuList";
+import type { AdminMenuItem } from "@/lib/menuItems";
 import type { PartyState } from "@/lib/types";
 
 type Stats = PartyState & { partyId: string; activeMenuItems: number };
 
-type Mode = "none" | "item" | "beer";
+type Mode =
+  | { kind: "none" }
+  | { kind: "item" }
+  | { kind: "beer" }
+  | { kind: "edit"; item: AdminMenuItem };
 
 export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
   const [stats, setStats] = useState<Stats | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [mode, setMode] = useState<Mode>("none");
+  const [mode, setMode] = useState<Mode>({ kind: "none" });
   const [notice, setNotice] = useState<string | null>(null);
+  const [menu, setMenu] = useState<AdminMenuItem[]>([]);
+  const [menuLoading, setMenuLoading] = useState(true);
 
   const load = useCallback(async () => {
     try {
@@ -26,9 +34,23 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
     }
   }, []);
 
+  const loadMenu = useCallback(async () => {
+    try {
+      const res = await fetch("/api/admin/menu", { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      const data = (await res.json()) as { items: AdminMenuItem[] };
+      setMenu(data.items);
+    } catch {
+      setError("Couldn't load the menu.");
+    } finally {
+      setMenuLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     void load();
-  }, [load]);
+    void loadMenu();
+  }, [load, loadMenu]);
 
   return (
     <div className="space-y-6 py-6">
@@ -58,30 +80,42 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
         <Stat label="Active menu items" value={stats ? String(stats.activeMenuItems) : "…"} wide />
       </section>
 
-      {mode === "none" ? (
+      {mode.kind === "none" ? (
         <div className="space-y-3">
           <button
             type="button"
-            onClick={() => { setMode("beer"); setNotice(null); }}
+            onClick={() => { setMode({ kind: "beer" }); setNotice(null); }}
             className="w-full rounded-2xl bg-flame px-6 py-5 text-lg font-black uppercase tracking-wide text-white shadow-lg shadow-flame/30 transition active:scale-[0.98]"
           >
             + Add beer
           </button>
           <button
             type="button"
-            onClick={() => { setMode("item"); setNotice(null); }}
+            onClick={() => { setMode({ kind: "item" }); setNotice(null); }}
             className="w-full rounded-2xl border-2 border-ink bg-white px-6 py-4 text-base font-black uppercase tracking-wide text-ink transition active:scale-[0.99]"
           >
             + Add menu item
           </button>
         </div>
       ) : (
-        <AddItemForm
-          beer={mode === "beer"}
-          onCancel={() => setMode("none")}
-          onAdded={(msg) => { setNotice(msg); setMode("none"); void load(); }}
+        <ItemForm
+          beer={mode.kind === "beer"}
+          editing={mode.kind === "edit" ? mode.item : null}
+          onCancel={() => setMode({ kind: "none" })}
+          onSaved={(msg) => {
+            setNotice(msg);
+            setMode({ kind: "none" });
+            void load();
+            void loadMenu();
+          }}
         />
       )}
+
+      <AdminMenuList
+        items={menu}
+        loading={menuLoading}
+        onEdit={(item) => { setMode({ kind: "edit", item }); setNotice(null); }}
+      />
 
       <TallyPreview stats={stats} />
 
@@ -98,22 +132,34 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
   );
 }
 
-function AddItemForm({
+function ItemForm({
   beer,
+  editing,
   onCancel,
-  onAdded,
+  onSaved,
 }: {
   beer: boolean;
+  editing: AdminMenuItem | null;
   onCancel: () => void;
-  onAdded: (message: string) => void;
+  onSaved: (message: string) => void;
 }) {
-  const [name, setName] = useState("");
+  // Every field starts from the item's current stored values when editing.
+  const [name, setName] = useState(editing?.name ?? "");
   // Beers always land in the Beer category, so that field is fixed, not typed.
-  const [category, setCategory] = useState(beer ? "Beer" : "");
-  const [variant, setVariant] = useState("");
-  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState(
+    editing?.category ?? (beer ? "Beer" : ""),
+  );
+  const [variant, setVariant] = useState(editing?.variant ?? "");
+  const [price, setPrice] = useState(
+    editing ? String(editing.menu_price) : "",
+  );
+  const [active, setActive] = useState(editing?.active ?? true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const isEdit = editing !== null;
+  // Editing a beer must still let the admin fix a wrong category.
+  const lockCategory = beer && !isEdit;
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -121,25 +167,37 @@ function AddItemForm({
     setBusy(true);
     setError(null);
     try {
-      const res = await fetch("/api/admin/menu", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          category: beer ? "Beer" : category,
-          variant,
-          menuPrice: price,
-        }),
-      });
-      const data = (await res.json()) as { item?: { name: string; variant: string | null; menu_price: number }; error?: string };
+      const res = await fetch(
+        isEdit ? `/api/admin/menu/${editing.id}` : "/api/admin/menu",
+        {
+          method: isEdit ? "PATCH" : "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            category: lockCategory ? "Beer" : category,
+            variant,
+            menuPrice: price,
+            active,
+          }),
+        },
+      );
+      const data = (await res.json()) as {
+        item?: AdminMenuItem;
+        error?: string;
+      };
       if (!res.ok || !data.item) {
-        setError(data.error ?? "Couldn't add the item.");
+        // Entered values are left in place so the admin can correct them.
+        setError(data.error ?? "Couldn't save the item.");
         return;
       }
       const v = data.item.variant ? ` (${data.item.variant})` : "";
-      onAdded(`Added ${data.item.name}${v} — ${formatINR(data.item.menu_price)}.`);
+      onSaved(
+        isEdit
+          ? `Menu item updated — ${data.item.name}${v}, ${formatINR(data.item.menu_price)}${data.item.active ? "" : ", inactive"}.`
+          : `Added ${data.item.name}${v} — ${formatINR(data.item.menu_price)}.`,
+      );
     } catch {
-      setError("Couldn't add the item. Please try again.");
+      setError("Couldn't save the item. Please try again.");
     } finally {
       setBusy(false);
     }
@@ -148,20 +206,20 @@ function AddItemForm({
   return (
     <form onSubmit={submit} className="space-y-4 rounded-2xl border-2 border-ink/10 bg-white p-4">
       <h2 className="text-base font-black uppercase tracking-wide">
-        {beer ? "Add beer" : "Add menu item"}
+        {isEdit ? "Edit menu item" : beer ? "Add beer" : "Add menu item"}
       </h2>
 
-      <Field label={beer ? "Beer name" : "Item name"}>
+      <Field label={beer && !isEdit ? "Beer name" : "Item name"}>
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder={beer ? "Kingfisher Ultra" : "Chicken Tandoori"}
-          aria-label={beer ? "Beer name" : "Item name"}
+          aria-label="Item name"
           className={inputClass}
         />
       </Field>
 
-      {beer ? null : (
+      {lockCategory ? null : (
         <Field label="Category">
           <input
             value={category}
@@ -173,12 +231,12 @@ function AddItemForm({
         </Field>
       )}
 
-      <Field label={beer ? "Size (optional)" : "Variant (optional)"}>
+      <Field label={beer && !isEdit ? "Size (optional)" : "Variant (optional)"}>
         <input
           value={variant}
           onChange={(e) => setVariant(e.target.value)}
           placeholder={beer ? "Pint" : "Half"}
-          aria-label={beer ? "Size" : "Variant"}
+          aria-label="Variant"
           className={inputClass}
         />
       </Field>
@@ -200,6 +258,24 @@ function AddItemForm({
         </label>
       </Field>
 
+      {isEdit ? (
+        <label className="flex h-14 cursor-pointer items-center gap-3 rounded-xl border-2 border-ink/10 px-3">
+          <input
+            type="checkbox"
+            checked={active}
+            onChange={(e) => setActive(e.target.checked)}
+            aria-label="Active"
+            className="h-6 w-6 accent-[#e4632a]"
+          />
+          <span className="text-sm font-bold uppercase tracking-wide">
+            Active
+            <span className="ml-2 font-medium normal-case text-ink-faint">
+              {active ? "orderable by guests" : "hidden from guests"}
+            </span>
+          </span>
+        </label>
+      ) : null}
+
       {error ? <Note tone="bad">{error}</Note> : null}
 
       <div className="flex gap-3">
@@ -215,7 +291,7 @@ function AddItemForm({
           disabled={busy}
           className="flex-[2] rounded-xl bg-flame px-4 py-4 text-sm font-black uppercase tracking-wide text-white disabled:opacity-40"
         >
-          {busy ? "Adding…" : beer ? "Add beer" : "Add to menu"}
+          {busy ? "Saving…" : isEdit ? "Save changes" : beer ? "Add beer" : "Add to menu"}
         </button>
       </div>
     </form>

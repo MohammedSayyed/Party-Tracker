@@ -2,8 +2,48 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { denyIfNotAdmin } from "@/lib/adminGuard";
 import { parseMenuItemInput } from "@/lib/validation";
+import {
+  MENU_COLUMNS,
+  duplicateMessage,
+  findDuplicate,
+  toAdminMenuItem,
+} from "@/lib/menuItems";
+import { compareCategories } from "@/lib/categories";
 
 export const dynamic = "force-dynamic";
+
+/**
+ * The admin's view of the menu: unlike GET /api/menu this includes inactive
+ * items, because the admin needs to see and reactivate them.
+ */
+export async function GET() {
+  const denied = await denyIfNotAdmin();
+  if (denied) return denied;
+
+  try {
+    const { data, error } = await supabaseAdmin()
+      .from("menu_items")
+      .select(MENU_COLUMNS)
+      .order("name", { ascending: true });
+
+    if (error) throw error;
+
+    const items = (data ?? []).map(toAdminMenuItem).sort(
+      (a, b) =>
+        compareCategories(a.category, b.category) ||
+        a.name.localeCompare(b.name) ||
+        (a.variant ?? "").localeCompare(b.variant ?? ""),
+    );
+
+    return NextResponse.json({ items });
+  } catch (err) {
+    console.error("GET /api/admin/menu failed:", err);
+    return NextResponse.json(
+      { error: "Couldn't load the menu. Please try again." },
+      { status: 503 },
+    );
+  }
+}
 
 /**
  * Adds one item to menu_items. Beers use this same route with category "Beer" —
@@ -30,24 +70,10 @@ export async function POST(request: Request) {
   try {
     const db = supabaseAdmin();
 
-    // Identity is (category, name, variant) — same key as the unique index, so
-    // this check and the database agree on what "duplicate" means.
-    let existing = db
-      .from("menu_items")
-      .select("id, name, category, variant, menu_price, active")
-      .eq("category", category)
-      .eq("name", name);
-    existing = variant === null ? existing.is("variant", null) : existing.eq("variant", variant);
-
-    const { data: clash, error: lookupError } = await existing.maybeSingle();
-    if (lookupError) throw lookupError;
-
+    const clash = await findDuplicate(db, { name, category, variant });
     if (clash) {
       return NextResponse.json(
-        {
-          error: `"${name}"${variant ? ` (${variant})` : ""} already exists in ${category}.`,
-          existing: { ...clash, menu_price: Number(clash.menu_price) },
-        },
+        { error: duplicateMessage({ name, category, variant }), existing: clash },
         { status: 409 },
       );
     }
@@ -55,23 +81,21 @@ export async function POST(request: Request) {
     const { data: inserted, error: insertError } = await db
       .from("menu_items")
       .insert({ name, category, variant, menu_price: menuPrice, active })
-      .select("id, name, category, variant, menu_price, active")
+      .select(MENU_COLUMNS)
       .single();
 
     if (insertError) {
       // The unique index is the real guard if two admins submit at once.
       if ((insertError as { code?: string }).code === "23505") {
         return NextResponse.json(
-          { error: `"${name}" already exists in ${category}.` },
+          { error: duplicateMessage({ name, category, variant }) },
           { status: 409 },
         );
       }
       throw insertError;
     }
 
-    return NextResponse.json({
-      item: { ...inserted, menu_price: Number(inserted.menu_price) },
-    });
+    return NextResponse.json({ item: toAdminMenuItem(inserted) });
   } catch (err) {
     console.error("POST /api/admin/menu failed:", err);
     return NextResponse.json(

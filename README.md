@@ -108,7 +108,9 @@ Share the deployment URL with the table. That's the whole onboarding.
 | `POST /api/orders/undo` | deletes one order, token required |
 | `GET/POST/DELETE /api/admin/session` | admin sign-in, sign-out, status |
 | `GET /api/admin/stats` | admin totals + bill summary + menu count |
+| `GET /api/admin/menu` | lists every menu item, including inactive ones |
 | `POST /api/admin/menu` | adds one menu item (or beer) |
+| `PATCH /api/admin/menu/[id]` | edits one menu item |
 | `POST /api/admin/clear` | deletes every order for the configured party |
 
 **Totals are never trusted from the browser.** The client sends
@@ -184,8 +186,31 @@ page.
 
 Afterwards the homepage shows ₹0 / 0 orders / 0 items on its next 5-second poll.
 
+### Editing the menu
+
+The admin page lists every item — including inactive ones, which guests cannot
+see — with a search box and an **EDIT** action on each row.
+
+Editing opens the same form, prefilled from the database. Name, category,
+variant, price and active/inactive are all editable.
+
+**Editing a menu item never changes historical orders.** Each order stores its
+own snapshot of the item name, category, variant and menu price from the moment
+it was placed, so correcting a menu row leaves recorded orders and the tally
+exactly as they were — only future orders pick up the new values. Rename
+`Test Beer / 650ml / ₹350` to `Kingfisher Ultra / Pint / ₹450` and an order
+already placed still reads `Test Beer · 650ml · ₹350`.
+
+Duplicates are rejected on `(category, name, variant)`, excluding the row being
+edited — so saving an item unchanged is fine.
+
+**Deactivating** hides an item from search and ordering while keeping the row
+and its history; the admin can still see and reactivate it. Nothing in the
+admin deletes a menu item, which is why there is no delete button.
+
+Bulk price corrections are still easiest through the CSV:
+`npm run menu && npm run seed`.
+
 ### Not included
 
 No accounts, no roles, no Supabase Auth — one shared password for one evening.
-Editing and deactivating existing menu items is deliberately not built; correct
-a price by editing the CSV and re-running `npm run menu && npm run seed`.
