@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #fdf6e9;
+  --color-cream-deep: #f6ead2;
+  --color-ink: #10233f;
+  --color-ink-soft: #35496b;
+  --color-ink-faint: #7b8aa5;
+  --color-flame: #e4632a;
+  --color-flame-dark: #c74f1c;
+  --color-gold: #e9a327;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  background-color: var(--color-cream);
+  /* iOS: keep the layout from jumping when the keyboard opens. */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+/* Tap targets shouldn't flash grey on iOS. */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Number inputs: no spinners, they're too small to hit on a phone. */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

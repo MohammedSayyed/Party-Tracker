@@ -1,0 +1,1004 @@
+[
+  {
+    "name": "Cafe Whisper",
+    "category": "Signature Cocktails",
+    "variant": null,
+    "menu_price": 475
+  },
+  {
+    "name": "Dessert Rose",
+    "category": "Signature Cocktails",
+    "variant": null,
+    "menu_price": 525
+  },
+  {
+    "name": "Melon Basil Spritz",
+    "category": "Signature Cocktails",
+    "variant": null,
+    "menu_price": 575
+  },
+  {
+    "name": "Rio Grande Refresher",
+    "category": "Signature Cocktails",
+    "variant": null,
+    "menu_price": 575
+  },
+  {
+    "name": "Maple Swirl",
+    "category": "Signature Cocktails",
+    "variant": null,
+    "menu_price": 575
+  },
+  {
+    "name": "Bullfrog",
+    "category": "Tall Cocktails",
+    "variant": null,
+    "menu_price": 775
+  },
+  {
+    "name": "Long Island Iced Tea",
+    "category": "Tall Cocktails",
+    "variant": null,
+    "menu_price": 745
+  },
+  {
+    "name": "Sunset Iced Tea",
+    "category": "Tall Cocktails",
+    "variant": null,
+    "menu_price": 745
+  },
+  {
+    "name": "Planter's Punch",
+    "category": "Tall Cocktails",
+    "variant": null,
+    "menu_price": 525
+  },
+  {
+    "name": "Lit Pitcher",
+    "category": "Pitchers",
+    "variant": null,
+    "menu_price": 2795
+  },
+  {
+    "name": "Sangria Pitcher",
+    "category": "Pitchers",
+    "variant": "Red / White",
+    "menu_price": 1765
+  },
+  {
+    "name": "Blue Kamikaze",
+    "category": "Shooters",
+    "variant": null,
+    "menu_price": 325
+  },
+  {
+    "name": "Woo Woo",
+    "category": "Shooters",
+    "variant": null,
+    "menu_price": 375
+  },
+  {
+    "name": "Mad Dog",
+    "category": "Shooters",
+    "variant": null,
+    "menu_price": 375
+  },
+  {
+    "name": "Jager Bomb",
+    "category": "Shooters",
+    "variant": null,
+    "menu_price": 725
+  },
+  {
+    "name": "B-52",
+    "category": "Shooters",
+    "variant": null,
+    "menu_price": 725
+  },
+  {
+    "name": "Cosmopolitan",
+    "category": "Classic Cocktails",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Vodka Gimlet",
+    "category": "Classic Cocktails",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Mojito",
+    "category": "Classic Cocktails",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Daiquiri",
+    "category": "Classic Cocktails",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Paloma",
+    "category": "Classic Cocktails",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Margarita",
+    "category": "Classic Cocktails",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Side Car",
+    "category": "Classic Cocktails",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Gin & Tonic",
+    "category": "Classic Cocktails",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Negroni",
+    "category": "Classic Cocktails",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Whiskey Highball",
+    "category": "Classic Cocktails",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Whiskey Sour",
+    "category": "Classic Cocktails",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Sangria",
+    "category": "Classic Cocktails",
+    "variant": "White / Red / Rose",
+    "menu_price": 695
+  },
+  {
+    "name": "Melon & Peach Cooler",
+    "category": "Mocktails",
+    "variant": null,
+    "menu_price": 335
+  },
+  {
+    "name": "Litchi Twist",
+    "category": "Mocktails",
+    "variant": null,
+    "menu_price": 315
+  },
+  {
+    "name": "Berry Basil Fizz",
+    "category": "Mocktails",
+    "variant": null,
+    "menu_price": 315
+  },
+  {
+    "name": "Fruity Farewell",
+    "category": "Mocktails",
+    "variant": null,
+    "menu_price": 315
+  },
+  {
+    "name": "Nutty Mocha",
+    "category": "Mocktails",
+    "variant": null,
+    "menu_price": 315
+  },
+  {
+    "name": "Tropical Mint Breeze",
+    "category": "Mocktails",
+    "variant": null,
+    "menu_price": 315
+  },
+  {
+    "name": "Virgin Mojito",
+    "category": "Mocktails",
+    "variant": null,
+    "menu_price": 335
+  },
+  {
+    "name": "Guava Mary",
+    "category": "Mocktails",
+    "variant": null,
+    "menu_price": 335
+  },
+  {
+    "name": "Virgin Sangria",
+    "category": "Mocktails",
+    "variant": null,
+    "menu_price": 335
+  },
+  {
+    "name": "Mushroom Galouti Kebab",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Onion Rings",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "BG Signature Nachos (Veg)",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Loaded Cheese Fries (Veg)",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Mutton Pepper Fry",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 525
+  },
+  {
+    "name": "Bacon Wrapped Prawns",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 595
+  },
+  {
+    "name": "Channa Garlic Fry",
+    "category": "Bar Bites",
+    "variant": null,
+    "menu_price": 125
+  },
+  {
+    "name": "Masala Nipattu",
+    "category": "Bar Bites",
+    "variant": null,
+    "menu_price": 115
+  },
+  {
+    "name": "Gun Powder Makhana",
+    "category": "Bar Bites",
+    "variant": null,
+    "menu_price": 115
+  },
+  {
+    "name": "Finger Millet Churros",
+    "category": "Bar Bites",
+    "variant": null,
+    "menu_price": 185
+  },
+  {
+    "name": "Chicken Popcorn",
+    "category": "Bar Bites",
+    "variant": null,
+    "menu_price": 385
+  },
+  {
+    "name": "Green Pea Flat Bread w/ Garlic Roasted Vegetables",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Wild Mushrooms & Avocado Toast",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Nachos",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Masala Paneer Quesadilla w/ Garlic Toum",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "French Fries",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 315
+  },
+  {
+    "name": "Tandoori Soya Chaap w/ Roomali Roti",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Bombay Pav Bhaji",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Stuffed Sabudana Vada",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 325
+  },
+  {
+    "name": "Chilli Pepper Tofu",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 325
+  },
+  {
+    "name": "WA Mushroom",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Crispy Fried Lotus Stem",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Spicy Roasted Paneer",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Soya Chunk Haleem Lucknowi",
+    "category": "Vegetarian Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Stuffed Tandoori Kebab",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 545
+  },
+  {
+    "name": "Dahi & Philly Cheese Kebab",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 445
+  },
+  {
+    "name": "Broccoli & Mascarpone Kulcha, Conf Tomato",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Ghana Dhania Tangadi Kebab",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Nachos (Chicken)",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Sriracha Chilli Prawns",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 445
+  },
+  {
+    "name": "Bhuna Chilli Fish Tikka",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Vietnamese Fish Cutlet",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Chicken Tikka",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Andhra Style Chilli Chicken",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Lantern Chilli Chicken",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Chicken Ghee Roast",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Pickled Mustard Fish",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Old Delhi Style Fried Chicken",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Pomfret Tawa / Tandoori",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 595
+  },
+  {
+    "name": "Thecha Prawns",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 545
+  },
+  {
+    "name": "Anand Ghotala Pav",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Chicken Lollipop",
+    "category": "Non-Veg Starters",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Chicken Wings",
+    "category": "Non-Veg Starters",
+    "variant": "4 pieces",
+    "menu_price": 395
+  },
+  {
+    "name": "Chicken Wings",
+    "category": "Non-Veg Starters",
+    "variant": "10 pieces",
+    "menu_price": 745
+  },
+  {
+    "name": "Chilli Mushroom Bao",
+    "category": "Bao",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Chicken Tikka Bao",
+    "category": "Bao",
+    "variant": null,
+    "menu_price": 345
+  },
+  {
+    "name": "Marble Chicken",
+    "category": "Bao",
+    "variant": null,
+    "menu_price": 375
+  },
+  {
+    "name": "Cream Cheese Dumplings",
+    "category": "Dimsums",
+    "variant": null,
+    "menu_price": 335
+  },
+  {
+    "name": "Wild Mushroom Truffle Oil Dumplings",
+    "category": "Dimsums",
+    "variant": null,
+    "menu_price": 325
+  },
+  {
+    "name": "Minced Vegetables & Water Chestnuts",
+    "category": "Dimsums",
+    "variant": null,
+    "menu_price": 315
+  },
+  {
+    "name": "Steamed Wonton Chicken Dumplings",
+    "category": "Dimsums",
+    "variant": null,
+    "menu_price": 375
+  },
+  {
+    "name": "Prawn Har Gao",
+    "category": "Dimsums",
+    "variant": null,
+    "menu_price": 445
+  },
+  {
+    "name": "Curried Crab Meat",
+    "category": "Dimsums",
+    "variant": null,
+    "menu_price": 445
+  },
+  {
+    "name": "Bok Choy Wrapped Pork",
+    "category": "Dimsums",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Mushroom & Potato Sliders",
+    "category": "Burgers & Sandwiches",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Three Bean Spicy Burger",
+    "category": "Burgers & Sandwiches",
+    "variant": null,
+    "menu_price": 445
+  },
+  {
+    "name": "Town Style Cheese Sandwich",
+    "category": "Burgers & Sandwiches",
+    "variant": null,
+    "menu_price": 445
+  },
+  {
+    "name": "Fried Chicken Sliders",
+    "category": "Burgers & Sandwiches",
+    "variant": null,
+    "menu_price": 395
+  },
+  {
+    "name": "Stuffed Chicken & Cheese Burger",
+    "category": "Burgers & Sandwiches",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Pulled Pork Burger",
+    "category": "Burgers & Sandwiches",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Margherita",
+    "category": "Pizza",
+    "variant": null,
+    "menu_price": 545
+  },
+  {
+    "name": "Sundried Tomato & Feta",
+    "category": "Pizza",
+    "variant": null,
+    "menu_price": 545
+  },
+  {
+    "name": "Marzano",
+    "category": "Pizza",
+    "variant": null,
+    "menu_price": 545
+  },
+  {
+    "name": "Diavola",
+    "category": "Pizza",
+    "variant": null,
+    "menu_price": 545
+  },
+  {
+    "name": "Indiana",
+    "category": "Pizza",
+    "variant": null,
+    "menu_price": 595
+  },
+  {
+    "name": "BBQ Smoked Chicken & Pesto",
+    "category": "Pizza",
+    "variant": null,
+    "menu_price": 595
+  },
+  {
+    "name": "Diavola Con Pollo",
+    "category": "Pizza",
+    "variant": null,
+    "menu_price": 595
+  },
+  {
+    "name": "Chicken Tikka",
+    "category": "Pizza",
+    "variant": null,
+    "menu_price": 595
+  },
+  {
+    "name": "Italiana",
+    "category": "Pizza",
+    "variant": null,
+    "menu_price": 595
+  },
+  {
+    "name": "Mac and Cheese",
+    "category": "Pasta & Risotto",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Veg Lasagne",
+    "category": "Pasta & Risotto",
+    "variant": null,
+    "menu_price": 415
+  },
+  {
+    "name": "Spaghetti Amatriciana",
+    "category": "Pasta & Risotto",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Porcini & Mushroom Risotto",
+    "category": "Pasta & Risotto",
+    "variant": null,
+    "menu_price": 445
+  },
+  {
+    "name": "Gnocchi Alla Sorrentina",
+    "category": "Pasta & Risotto",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Spaghetti Aglio Olio Fresh Red Chilli",
+    "category": "Pasta & Risotto",
+    "variant": "Veg",
+    "menu_price": 445
+  },
+  {
+    "name": "Spaghetti Aglio Olio Fresh Red Chilli",
+    "category": "Pasta & Risotto",
+    "variant": "Chicken",
+    "menu_price": 495
+  },
+  {
+    "name": "Spaghetti Aglio Olio Fresh Red Chilli",
+    "category": "Pasta & Risotto",
+    "variant": "Prawns",
+    "menu_price": 545
+  },
+  {
+    "name": "Penne Arrabiata",
+    "category": "Pasta & Risotto",
+    "variant": "Veg",
+    "menu_price": 445
+  },
+  {
+    "name": "Penne Arrabiata",
+    "category": "Pasta & Risotto",
+    "variant": "Chicken",
+    "menu_price": 495
+  },
+  {
+    "name": "Penne Arrabiata",
+    "category": "Pasta & Risotto",
+    "variant": "Prawns",
+    "menu_price": 545
+  },
+  {
+    "name": "Penne Creamy Cheese Sauce",
+    "category": "Pasta & Risotto",
+    "variant": "Veg",
+    "menu_price": 445
+  },
+  {
+    "name": "Penne Creamy Cheese Sauce",
+    "category": "Pasta & Risotto",
+    "variant": "Chicken",
+    "menu_price": 495
+  },
+  {
+    "name": "Penne Creamy Cheese Sauce",
+    "category": "Pasta & Risotto",
+    "variant": "Prawns",
+    "menu_price": 545
+  },
+  {
+    "name": "Stuffed Baingan Chilli Green Tomato Salad with Kashmiri Roti",
+    "category": "Vegetarian Main Course",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Tomato Chilli Fried Rice with Chilli Garlic Paneer",
+    "category": "Vegetarian Main Course",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Thai Curry with Jasmine Rice",
+    "category": "Vegetarian Main Course",
+    "variant": "Vegetable",
+    "menu_price": 425
+  },
+  {
+    "name": "Dal Makhani with Laccha Paratha",
+    "category": "Vegetarian Main Course",
+    "variant": null,
+    "menu_price": 445
+  },
+  {
+    "name": "Malaysian Laksa",
+    "category": "Vegetarian Main Course",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Pulled Jackfruit Masala, Puff Paratha",
+    "category": "Vegetarian Main Course",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Udon Noodle, Finger Tofu",
+    "category": "Vegetarian Main Course",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Methi Paneer with Butter Garlic Naan",
+    "category": "Vegetarian Main Course",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Kashmiri Nadru Yakhni",
+    "category": "Vegetarian Main Course",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Tomato Chilli Fried Rice w/ Chilli Garlic Chicken",
+    "category": "Non-Veg Main Course",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Thai Curry w/ Jasmine Rice",
+    "category": "Non-Veg Main Course",
+    "variant": "Chicken",
+    "menu_price": 495
+  },
+  {
+    "name": "Thai Curry w/ Jasmine Rice",
+    "category": "Non-Veg Main Course",
+    "variant": "Prawns",
+    "menu_price": 545
+  },
+  {
+    "name": "Malaysian Laksa",
+    "category": "Non-Veg Main Course",
+    "variant": "Chicken",
+    "menu_price": 445
+  },
+  {
+    "name": "Malaysian Laksa",
+    "category": "Non-Veg Main Course",
+    "variant": "Prawn",
+    "menu_price": 495
+  },
+  {
+    "name": "Udon Noodle, Finger Tofu",
+    "category": "Non-Veg Main Course",
+    "variant": "Chicken",
+    "menu_price": 495
+  },
+  {
+    "name": "Udon Noodle, Finger Tofu",
+    "category": "Non-Veg Main Course",
+    "variant": "Prawns",
+    "menu_price": 545
+  },
+  {
+    "name": "Grilled Atlantic Salmon",
+    "category": "Non-Veg Main Course",
+    "variant": null,
+    "menu_price": 795
+  },
+  {
+    "name": "Stuffed Chicken Breast w/ Red Wine Reduction",
+    "category": "Non-Veg Main Course",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Fish & Chips",
+    "category": "Non-Veg Main Course",
+    "variant": null,
+    "menu_price": 595
+  },
+  {
+    "name": "Malanad Fish Curry w/ Plain Rice",
+    "category": "Non-Veg Main Course",
+    "variant": null,
+    "menu_price": 595
+  },
+  {
+    "name": "Bangkok Chicken Rice Bowl",
+    "category": "Non-Veg Main Course",
+    "variant": null,
+    "menu_price": 745
+  },
+  {
+    "name": "Butter Chicken w/ Coriander Rice",
+    "category": "Non-Veg Main Course",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Hyderabadi Chicken Biryani",
+    "category": "Non-Veg Main Course",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Varutharacha Chicken Curry w/ Wheat Paratha",
+    "category": "Non-Veg Main Course",
+    "variant": null,
+    "menu_price": 495
+  },
+  {
+    "name": "Mutton Rogan Josh w/ Butter Garlic Naan",
+    "category": "Non-Veg Main Course",
+    "variant": null,
+    "menu_price": 545
+  },
+  {
+    "name": "Bonnie Mutton Biryani",
+    "category": "Non-Veg Main Course",
+    "variant": null,
+    "menu_price": 595
+  },
+  {
+    "name": "Caesar Salad",
+    "category": "Salads",
+    "variant": "Veg",
+    "menu_price": 425
+  },
+  {
+    "name": "Caesar Salad",
+    "category": "Salads",
+    "variant": "Chicken",
+    "menu_price": 495
+  },
+  {
+    "name": "Green Salad",
+    "category": "Salads",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Pickled Beetroot & Walnut Salad",
+    "category": "Salads",
+    "variant": null,
+    "menu_price": 425
+  },
+  {
+    "name": "Roti",
+    "category": "Staples",
+    "variant": "1 pc",
+    "menu_price": 50
+  },
+  {
+    "name": "Butter Roti",
+    "category": "Staples",
+    "variant": "1 pc",
+    "menu_price": 60
+  },
+  {
+    "name": "Butter Naan",
+    "category": "Staples",
+    "variant": "1 pc",
+    "menu_price": 60
+  },
+  {
+    "name": "Butter Garlic Naan",
+    "category": "Staples",
+    "variant": "1 pc",
+    "menu_price": 85
+  },
+  {
+    "name": "Steamed Rice",
+    "category": "Staples",
+    "variant": null,
+    "menu_price": 125
+  },
+  {
+    "name": "Coriander Rice",
+    "category": "Staples",
+    "variant": null,
+    "menu_price": 150
+  },
+  {
+    "name": "Jasmine Rice",
+    "category": "Staples",
+    "variant": null,
+    "menu_price": 125
+  },
+  {
+    "name": "Bao",
+    "category": "Staples",
+    "variant": "1 pc",
+    "menu_price": 55
+  },
+  {
+    "name": "Kashmiri Roti",
+    "category": "Staples",
+    "variant": "1 pc",
+    "menu_price": 50
+  },
+  {
+    "name": "Pav",
+    "category": "Staples",
+    "variant": "1 pc",
+    "menu_price": 50
+  },
+  {
+    "name": "New York Cheesecake",
+    "category": "Desserts",
+    "variant": null,
+    "menu_price": 545
+  },
+  {
+    "name": "Mocha Tres Leches",
+    "category": "Desserts",
+    "variant": null,
+    "menu_price": 545
+  },
+  {
+    "name": "Cassata",
+    "category": "Desserts",
+    "variant": null,
+    "menu_price": 365
+  },
+  {
+    "name": "Hazelnut Chocolate Cake",
+    "category": "Desserts",
+    "variant": null,
+    "menu_price": 365
+  },
+  {
+    "name": "Apple Torte",
+    "category": "Desserts",
+    "variant": null,
+    "menu_price": 365
+  },
+  {
+    "name": "Tiramisu",
+    "category": "Desserts",
+    "variant": null,
+    "menu_price": 365
+  },
+  {
+    "name": "Pecan Caramel Pie",
+    "category": "Desserts",
+    "variant": null,
+    "menu_price": 345
+  }
+]
