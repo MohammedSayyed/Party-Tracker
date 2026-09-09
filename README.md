@@ -36,6 +36,7 @@ Fill in:
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | client (menu reads only) |
 | `SUPABASE_SERVICE_ROLE_KEY` | **server only** — API routes and seed |
 | `NEXT_PUBLIC_PARTY_ID` | the single party this deployment tracks |
+| `ADMIN_PASSWORD` | **server only** — unlocks the hidden admin page |
 
 `.env.local` is gitignored. Never prefix the service role key with
 `NEXT_PUBLIC_`.
@@ -105,6 +106,10 @@ Share the deployment URL with the table. That's the whole onboarding.
 | `GET /api/orders` | tracked total, order/item counts, tally, last 10 orders |
 | `POST /api/orders` | validates and inserts one order, returns an undo token |
 | `POST /api/orders/undo` | deletes one order, token required |
+| `GET/POST/DELETE /api/admin/session` | admin sign-in, sign-out, status |
+| `GET /api/admin/stats` | admin totals + bill summary + menu count |
+| `POST /api/admin/menu` | adds one menu item (or beer) |
+| `POST /api/admin/clear` | deletes every order for the configured party |
 
 **Totals are never trusted from the browser.** The client sends
 `menuItemId`, `quantity` and `unitPrice`; the server re-reads the menu item,
@@ -123,3 +128,64 @@ menu later never rewrites history — and comparing `menu_price_at_order` agains
 stored. Undo requires that token and works for 60 seconds server-side (the UI
 offers 30). There is no endpoint that deletes an arbitrary order, and the anon
 key cannot read or write the `orders` table at all.
+
+---
+
+## Admin
+
+There is a hidden admin page at **`/hot-admin`**. Nothing links to it, and it is
+marked `noindex` — but the URL is not the security. Every admin action is
+verified server-side.
+
+### Setup
+
+Set `ADMIN_PASSWORD` in `.env.local` (and in Vercel's environment variables for
+production). If it is unset, the page loads but every admin action is disabled.
+
+```
+ADMIN_PASSWORD=pick-something-long
+```
+
+Never prefix it with `NEXT_PUBLIC_`. The password is posted once and exchanged
+for an `httpOnly`, `sameSite=strict` cookie holding an HMAC — not the password —
+so client JavaScript can neither read the secret nor forge the token. The
+session lasts 8 hours.
+
+### Adding beers
+
+Beer prices weren't known when the menu was transcribed, so add them at the
+venue:
+
+**`/hot-admin` → `+ ADD BEER`** → name, size (optional), price.
+
+A beer is an ordinary row in `menu_items` with `category = 'Beer'`. There is no
+separate beer table, so it immediately inherits search, the order form, price
+prefill and the tally. Add `Kingfisher Ultra / Pint / ₹350` and a guest
+searching "king" sees it straight away, with ₹350 prefilled and still editable.
+
+`+ ADD MENU ITEM` is the same form with a free-text category, for dishes missing
+from the menu.
+
+Duplicates are rejected on `(category, name, variant)` — the same key as the
+database's unique index.
+
+### Resetting the bill
+
+**`/hot-admin` → `CLEAR ENTIRE BILL`** → confirm.
+
+> ⚠️ **This permanently deletes every order for the current party.** There is no
+> undo. Use it once, just before the real party starts, to clear test orders.
+
+It deletes only rows in `orders`, in a single server-side statement scoped to
+the configured `NEXT_PUBLIC_PARTY_ID`. The party id is never read from the
+request, so a client cannot aim it at another party. **Menu items, prices and
+categories are untouched** — including beers and dishes added through the admin
+page.
+
+Afterwards the homepage shows ₹0 / 0 orders / 0 items on its next 5-second poll.
+
+### Not included
+
+No accounts, no roles, no Supabase Auth — one shared password for one evening.
+Editing and deactivating existing menu items is deliberately not built; correct
+a price by editing the CSV and re-running `npm run menu && npm run seed`.

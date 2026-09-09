@@ -67,3 +67,69 @@ function toNumber(value: unknown): number | null {
   if (typeof n !== "number" || !Number.isFinite(n)) return null;
   return n;
 }
+
+export const MAX_NAME_LENGTH = 80;
+export const MAX_MENU_PRICE = MAX_UNIT_PRICE;
+
+export type MenuItemInput = {
+  name: string;
+  category: string;
+  variant: string | null;
+  menuPrice: number;
+  active: boolean;
+};
+
+export type MenuItemValidation =
+  | { ok: true; value: MenuItemInput }
+  | { ok: false; error: string };
+
+/**
+ * Validates the body of POST /api/admin/menu. Same posture as orders: the
+ * browser is not trusted, everything is trimmed and bounded server-side.
+ */
+export function parseMenuItemInput(body: unknown): MenuItemValidation {
+  if (typeof body !== "object" || body === null) {
+    return { ok: false, error: "Invalid request." };
+  }
+  const raw = body as Record<string, unknown>;
+
+  const name = typeof raw.name === "string" ? raw.name.trim() : "";
+  if (name === "") return { ok: false, error: "Item name is required." };
+  if (name.length > MAX_NAME_LENGTH) {
+    return { ok: false, error: `Item name must be ${MAX_NAME_LENGTH} characters or fewer.` };
+  }
+
+  const category = typeof raw.category === "string" ? raw.category.trim() : "";
+  if (category === "") return { ok: false, error: "Category is required." };
+  if (category.length > MAX_NAME_LENGTH) {
+    return { ok: false, error: `Category must be ${MAX_NAME_LENGTH} characters or fewer.` };
+  }
+
+  const variantRaw = typeof raw.variant === "string" ? raw.variant.trim() : "";
+  if (variantRaw.length > MAX_NAME_LENGTH) {
+    return { ok: false, error: `Variant must be ${MAX_NAME_LENGTH} characters or fewer.` };
+  }
+
+  const priceValue =
+    typeof raw.menuPrice === "string" ? Number(raw.menuPrice.trim()) : raw.menuPrice;
+  if (typeof priceValue !== "number" || !Number.isFinite(priceValue)) {
+    return { ok: false, error: "Enter a valid price." };
+  }
+  if (priceValue < 0 || priceValue > MAX_MENU_PRICE) {
+    return {
+      ok: false,
+      error: `Price must be between ₹0 and ₹${MAX_MENU_PRICE.toLocaleString("en-IN")}.`,
+    };
+  }
+
+  return {
+    ok: true,
+    value: {
+      name,
+      category,
+      variant: variantRaw || null,
+      menuPrice: Math.round(priceValue * 100) / 100,
+      active: raw.active === undefined ? true : raw.active === true,
+    },
+  };
+}
