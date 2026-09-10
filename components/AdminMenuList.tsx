@@ -18,7 +18,12 @@ export function AdminMenuList({
   onEdit: (item: AdminMenuItem) => void;
 }) {
   const [query, setQuery] = useState("");
+  const [showAll, setShowAll] = useState(false);
   const trimmed = query.trim().toLowerCase();
+
+  // The full menu is ~170 rows; rendering it all buries the rest of the page,
+  // so show a slice until the admin searches or asks for everything.
+  const PREVIEW = 12;
 
   const visible = useMemo(() => {
     if (!trimmed) return items;
@@ -31,6 +36,8 @@ export function AdminMenuList({
   }, [items, trimmed]);
 
   const inactiveCount = items.filter((i) => !i.active).length;
+  const capped = trimmed || showAll ? visible : visible.slice(0, PREVIEW);
+  const hiddenCount = visible.length - capped.length;
 
   return (
     <section>
@@ -61,7 +68,7 @@ export function AdminMenuList({
         </p>
       ) : (
         <ul className="space-y-2">
-          {visible.map((item) => (
+          {capped.map((item) => (
             <li
               key={item.id}
               className="flex items-center justify-between gap-3 rounded-2xl border-2 border-ink/10 bg-white px-3 py-2.5"
@@ -88,6 +95,16 @@ export function AdminMenuList({
           ))}
         </ul>
       )}
+
+      {hiddenCount > 0 ? (
+        <button
+          type="button"
+          onClick={() => setShowAll(true)}
+          className="mt-2 h-12 w-full rounded-xl border-2 border-ink/15 bg-white text-xs font-bold uppercase tracking-wide text-ink-soft"
+        >
+          Show all {visible.length} items
+        </button>
+      ) : null}
     </section>
   );
 }

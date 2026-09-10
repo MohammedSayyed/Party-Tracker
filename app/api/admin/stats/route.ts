@@ -45,6 +45,9 @@ export async function GET() {
 
     return NextResponse.json({
       ...buildPartyState(orders),
+      // The full list, not just the recent 10: the admin bill must show every
+      // order behind the subtotal, never a visible subset.
+      orders,
       partyId: PARTY_ID,
       activeMenuItems: menuRes.count ?? 0,
     });

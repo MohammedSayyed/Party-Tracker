@@ -11,6 +11,22 @@ export function formatINR(value: number): string {
   return inr.format(Math.round(value));
 }
 
+const inrPrecise = new Intl.NumberFormat("en-IN", {
+  style: "currency",
+  currency: "INR",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
+/**
+ * ₹748.80 — two decimals, for the admin bill where GST produces paise. The
+ * homepage keeps the whole-rupee formatter above.
+ */
+export function formatINRPrecise(value: number): string {
+  if (!Number.isFinite(value)) return "₹0.00";
+  return inrPrecise.format(value);
+}
+
 /** "8:42 PM" in the viewer's local timezone. */
 export function formatTime(iso: string): string {
   const d = new Date(iso);

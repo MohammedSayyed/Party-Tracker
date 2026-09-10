@@ -112,6 +112,7 @@ Share the deployment URL with the table. That's the whole onboarding.
 | `POST /api/admin/menu` | adds one menu item (or beer) |
 | `PATCH /api/admin/menu/[id]` | edits one menu item |
 | `POST /api/admin/clear` | deletes every order for the configured party |
+| `DELETE /api/admin/orders/[id]` | deletes one order, scoped to that party |
 
 **Totals are never trusted from the browser.** The client sends
 `menuItemId`, `quantity` and `unitPrice`; the server re-reads the menu item,
@@ -170,6 +171,45 @@ from the menu.
 
 Duplicates are rejected on `(category, name, variant)` — the same key as the
 database's unique index.
+
+### The current bill
+
+The admin page shows a **Current bill** section: every order behind the
+subtotal — item, variant, quantity, the price actually charged, the line total
+and the time — not just the aggregated tally the homepage shows. Both derive
+from the same `orders` rows; the homepage aggregates by item, the admin bill
+lists each order.
+
+**GST** sits under the bill as an editable percentage. The amount and grand
+total recalculate as you type, with no save button and no reload:
+
+```
+Subtotal      ₹4,160.00
+GST %  [18]     ₹748.80
+Grand total   ₹4,908.80
+```
+
+`gstAmount = subtotal × gst% / 100`, and `grandTotal = subtotal + gstAmount` —
+GST is never charged on a subtotal that already includes it. The maths runs in
+integer paise, so no `₹748.7999999` artifacts. The percentage is UI state only:
+it is not stored on orders and not sent to the server, because GST belongs to
+the reconciliation, not to any single order. It resets to 18% on reload.
+
+Invalid input (negative, over 100, non-numeric, or a half-typed empty box)
+falls back to 0% and shows a note rather than ever rendering `NaN`.
+
+### Deleting one order
+
+Each row in the current bill has a **DELETE** with an inline confirmation, for
+fixing a single mis-recorded order without wiping the whole bill. The subtotal,
+GST and grand total update immediately; the homepage catches up on its next
+5-second poll.
+
+Deletion is server-side and scoped to the configured party — the request
+carries only the order id, and the party comes from `NEXT_PUBLIC_PARTY_ID` on
+the server, so an id from another party matches nothing and returns 404. Only
+that one row is removed: the menu item, its price and every other order are
+untouched.
 
 ### Resetting the bill
 

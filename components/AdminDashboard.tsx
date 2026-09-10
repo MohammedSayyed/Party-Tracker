@@ -4,10 +4,15 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { formatINR } from "@/lib/format";
 import { AdminMenuList } from "@/components/AdminMenuList";
+import { CurrentBill } from "@/components/CurrentBill";
 import type { AdminMenuItem } from "@/lib/menuItems";
-import type { PartyState } from "@/lib/types";
+import type { Order, PartyState } from "@/lib/types";
 
-type Stats = PartyState & { partyId: string; activeMenuItems: number };
+type Stats = PartyState & {
+  orders: Order[];
+  partyId: string;
+  activeMenuItems: number;
+};
 
 type Mode =
   | { kind: "none" }
@@ -111,13 +116,22 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
         />
       )}
 
+      <CurrentBill
+        orders={stats?.orders ?? []}
+        subtotal={stats?.trackedTotal ?? 0}
+        onDeleted={(msg) => {
+          setNotice(msg);
+          void load();
+        }}
+      />
+
+      <TallyPreview stats={stats} />
+
       <AdminMenuList
         items={menu}
         loading={menuLoading}
         onEdit={(item) => { setMode({ kind: "edit", item }); setNotice(null); }}
       />
-
-      <TallyPreview stats={stats} />
 
       <ClearBill
         disabled={!stats || stats.orderCount === 0}
